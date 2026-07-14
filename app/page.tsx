@@ -14,7 +14,7 @@ export default async function Page() {
           {!session && (
             <form className="mt-2" action={async () => {
               "use server"
-              await signIn("github", { redirectTo: "/dashboard" })
+              await signIn("github", { redirectTo: "/home" })
             }}>
               <Button type="submit">Sign In With Github</Button>
             </form>
