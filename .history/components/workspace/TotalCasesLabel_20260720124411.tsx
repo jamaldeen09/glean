@@ -1,0 +1,11 @@
+"use client"
+import useDockets from "@/hooks/case/use-cases"
+
+export default function TotalCasesLabel() {
+    const { cases } = useDockets();
+    return (
+        <h2 className="text-[11px] text-muted-foreground">
+            {dockets.length} open matters
+        </h2>
+    )
+}

@@ -1,0 +1,27 @@
+import { editCase, EditCaseData } from '@/app/workspace/_actions';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
+
+export function useEditCase() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ caseId, data }: {
+        caseId: string;
+        data: EditCaseData;
+    }) => {
+      const result = await editCase(caseId, data);
+      if (!result.success) 
+        throw new Error(result.message);
+
+      return result.message;
+    },
+    onSuccess: (msg) => {
+        queryClient.resetQueries({ queryKey: ["cases"] });
+        toast.success(msg);
+    },
+
+    onError: (err) => toast.error()
+  });
+}
